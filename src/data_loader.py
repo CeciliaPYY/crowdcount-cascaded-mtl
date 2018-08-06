@@ -16,6 +16,7 @@ class ImageDataLoader():
         self.pre_load = pre_load
         self.data_files = [filename for filename in os.listdir(data_path) \
                            if os.path.isfile(os.path.join(data_path,filename))]
+        self.data_files = [f.lstrip("._") for f in self.data_files if f.startswith(".")]
         self.data_files.sort()
         self.shuffle = shuffle
         if shuffle:
