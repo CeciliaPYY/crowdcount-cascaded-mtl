@@ -3,7 +3,6 @@ import torch.nn as nn
 from torch.autograd import Variable
 import numpy as np
 
-        
 
 class Conv2d(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, stride=1, NL='relu', same_padding=False, bn=False):
@@ -61,13 +60,16 @@ def load_net(fname, net):
 
 
 
-def np_to_variable(x, is_cuda=True, is_training=False, dtype=torch.FloatTensor):
+def np_to_variable(x, is_cuda=True, cuda=None, is_training=False, dtype=torch.FloatTensor):
     if is_training:
         v = Variable(torch.from_numpy(x).type(dtype))
     else:
         v = Variable(torch.from_numpy(x).type(dtype), requires_grad = False, volatile = True)
     if is_cuda:
-        v = v.cuda()
+        if cuda:
+            v = v.to(device=cuda)
+        else:
+            v = v.cuda()
     return v
 
 

@@ -2,10 +2,13 @@ from crowd_count import CrowdCounter
 import network
 import numpy as np
 
-def evaluate_model(trained_model, data_loader):    
+def evaluate_model(trained_model, data_loader, cuda=None):    
     net = CrowdCounter()
     network.load_net(trained_model, net)
-    net.cuda()
+    if cuda:
+        net.to(device=cuda)
+    else:
+        net.cuda()
     net.eval()
     mae = 0.0
     mse = 0.0
