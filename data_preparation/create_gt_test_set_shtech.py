@@ -1,7 +1,7 @@
 import numpy as np
 import os
 import cv2
-from src.get_density_map_gaussian_xuan import get_density_map_gaussian
+from src.get_density_map_gaussian import get_density_map_gaussian
 import json
 
 dataset = 'B'
